@@ -3,7 +3,7 @@
 #include <conio.h> 
 int main(void){
 	
-	int i,j,password,t=0,d=0;
+	int i,j,password,t=0,d=0,e,f;
 	char ch,yn,a,b,c;
 	printf("Welcome to my homework\n");
 	for(i=20;i>=1;i--){							//運用巢狀for迴圈製作屬於自己的開場畫面 
@@ -47,26 +47,35 @@ int main(void){
 		printf("請輸入一個字元\n");					//輸出"請輸入一個字元" 
 		fflush(stdin);								//清除緩存 
 	    scanf("%c",&ch);							//輸入一字元 
-	    if(ch=='A'||ch=='a'){						//若字元在A或a 
-	    	system("CLS");
+	    if(ch=='A'||ch=='a'){						//若字元在A或a
+		while(1){
+			system("CLS");
 	    	printf("輸入一個a~n的字母:");
 	    	fflush(stdin);
 	    	scanf("%c",&a);
-	    	for(b=a;b>='a';b--){
+	    	if(a<'a'||a>'n'){
+	    		printf("錯誤,輸入一個a~n的字母\n");
+	    		break;
+			} 
+			else{for(b=a;b>='a';b--){
 	    		for(c=b;c<=a;c++){
 	    			printf("%c",c);
 				}
 				printf("\n");
 			}
-			system("PAUSE");
+			break;	
+			}
+		}
+		getch();
+		system("CLS");
 		}
 		else if(ch=='B'|ch== 'b'){
 			
 			printf("請輸入一個1~9的數字:");
 			scanf("%d",&d);
 			if(d<=9&&d>=1){
-				for(int e=1;e<=d;e++){
-					for(int f=1;f<=e;f++){
+				for(e=1;e<=d;e++){
+					for(f=1;f<=e;f++){
 						printf("%d ",e*f);
 					}
 					printf("\n");
@@ -82,11 +91,12 @@ int main(void){
 		else if(ch=='C'||ch=='c'){					
 			printf("Continue?\n");
 			scanf("%s",&yn);
-			if(yn=='y'||yn=='Y'){
-				getch();
-				system("CLS");
-			}	
 			if(yn=='n'||yn=='N'){
+				system("CLS");
+				printf("謝謝,掰掰");
+				return 0;
+			}	
+			if(yn=='y'||yn=='Y'){
 				break;
 			}
 			else{
