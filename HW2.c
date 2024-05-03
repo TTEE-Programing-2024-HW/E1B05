@@ -48,12 +48,17 @@ int main(void){
 		fflush(stdin);								//清除緩存 
 	    scanf("%c",&ch);							//輸入一字元 
 	    if(ch=='A'||ch=='a'){						//若字元在A或a 
+	    	system("CLS");
 	    	printf("輸入一個a~n的字母:");
-	    	scanf("%s",&a);
-	    	for(b='&a';b>='a';b--){
-	    			printf("%s\n",b);
+	    	fflush(stdin);
+	    	scanf("%c",&a);
+	    	for(b=a;b>='a';b--){
+	    		for(c=b;c<=a;c++){
+	    			printf("%c",c);
+				}
+				printf("\n");
 			}
-	    	
+			system("PAUSE");
 		}
 		else if(ch=='B'|ch== 'b'){
 			
