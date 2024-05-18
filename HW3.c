@@ -14,7 +14,7 @@ void seat(char arr[10][10]){
 }
 
 int main(void){
-	int i,j,password,t=0,R,C;
+	int i,j,password,t=0,R,C,num;
 	char ch,yn;
 	char arr[10][10];
 	printf("Welcome to my homework\n");
@@ -82,14 +82,42 @@ int main(void){
 			system("CLS");
 		}
 		else if(ch=='B'||ch== 'b'){					//若選選項B時 
-			
+			system("CLS");
+			printf("請問需要幾個座位(1~4)?");
+			while(1){
+				scanf("%d",&num); 
+				if(num<=4&&num>=1){
+					break;
+				}
+				else{
+					prirntf("請輸入1~4個座位");
+					break;
+				}
+			}
 		}
 		else if(ch=='C'||ch=='c'){
-			
-		}
+			printf("請輸入選擇的座位");
+			while(1){
+				scanf("%d-%d",arr[R][C]);
+				printf("還有要選擇嗎?");
+				scanf("%s",&yn);						//輸入回答 
+				fflush(stdin);
+				printf("%c",arr);
+				if(yn=='y'||yn=='Y'){					//若答案是y或Y則繼續 
+					system("CLS");						//清除螢幕 
+					return 0;							//繼續迴圈 
+				}	
+				if(yn=='n'||yn=='N'){					//若答案為n或N則結束 
+					system("CLS");						//清除螢幕 
+					printf("謝謝,掰掰");				//輸出"謝謝,掰掰" 
+					break;
+				}
+				}
+			}
 		else if(ch=='D'||ch=='d'){					//若選選項C時	
 			printf("Continue?\n");					//輸出"continue?"(詢問是否繼續) 
 			while(1){
+				yn=0;
 				scanf("%s",&yn);						//輸入回答 
 				fflush(stdin);
 				if(yn=='y'||yn=='Y'){					//若答案是y或Y則繼續 
