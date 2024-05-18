@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h> 
+#include <time.h> 
+
 void seat(char arr[10][10]){
-	int 
+	int R,C;
+	for(R=0;R<10;R++){
+		for(C=0;C<10;C++){
+			printf("%c",arr[R][C]);
+		}
+		printf("\n");
+	}
 }
+
 int main(void){
-	
-	int i,j,password,t=0,d=0,e,f,g;
-	char ch,yn,a,b,c;
+	int i,j,password,t=0,R,C;
+	char ch,yn;
+	char arr[10][10];
 	printf("Welcome to my homework\n");
 	for(i=20;i>=1;i--){								//運用巢狀for迴圈製作屬於自己的開場畫面 
 		for(j=1;j<=i;j++){	
@@ -40,6 +49,21 @@ int main(void){
 	system("PAUSE");								//螢幕畫面暫停，並等待使用者按任意鍵
 	system("CLS");									//清除畫面 
 	
+	arr[0][0]='\\';
+	for(i=1;i<=9;i++){
+		arr[i][0]='0'+i;
+		arr[0][i]='0'+i;
+	}
+	for(R=1;R<=9;R++){
+		for(C=1;C<=9;C++){
+			arr[R][C]='-';
+		}	
+	}
+	for(i=0;i<10;i++){
+		srand(time(NULL)*i);
+		arr[rand()%9+1][rand()%9+1]='*';
+	}
+	
 	do{
 		printf(" ________________________\n");		//製作屬於自己的表單樣式 
 		printf("|a.Available seats        |\n");
@@ -50,15 +74,17 @@ int main(void){
 		printf("請輸入一個字元\n");					//輸出"請輸入一個字元" 
 		fflush(stdin);								//清除緩存 
 	    scanf("%c",&ch);							//輸入一字元 
+	    fflush(stdin);
 	    if(ch=='A'||ch=='a'){						//若選選項A時
-		while(1){									//利用while迴圈限制輸入值只能在a~n之間 
 			system("CLS");							//清除螢幕 
-			
+			seat(arr);
+			system("pause");
+			system("CLS");
 		}
 		else if(ch=='B'||ch== 'b'){					//若選選項B時 
 			
 		}
-		else if(ch=='C'||ch==='c'){
+		else if(ch=='C'||ch=='c'){
 			
 		}
 		else if(ch=='D'||ch=='d'){					//若選選項C時	
