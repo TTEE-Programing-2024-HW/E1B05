@@ -89,20 +89,21 @@ int main(void){
 		}
 		else if(ch=='D'||ch=='d'){					//若選選項C時	
 			printf("Continue?\n");					//輸出"continue?"(詢問是否繼續) 
-			scanf("%s",&yn);						//輸入回答 
-			if(yn=='y'||yn=='Y'){					//若答案是y或Y則繼續 
-				system("CLS");						//清除螢幕 
-				continue;							//繼續迴圈 
-			}	
-			if(yn=='n'||yn=='N'){					//若答案為n或N則結束 
-				system("CLS");						//清除螢幕 
-				printf("謝謝,掰掰");				//輸出"謝謝,掰掰" 
-				return 0;							//結束程式 
-			}
-			else{									//若不是Y、y、N、n話 
-				printf("請輸入Y或N\n");				//輸出"請輸入Y或N" 
+			while(1){
+				scanf("%s",&yn);						//輸入回答 
+				fflush(stdin);
+				if(yn=='y'||yn=='Y'){					//若答案是y或Y則繼續 
+					system("CLS");						//清除螢幕 
+					break;							//繼續迴圈 
+				}	
+				if(yn=='n'||yn=='N'){					//若答案為n或N則結束 
+					system("CLS");						//清除螢幕 
+					printf("謝謝,掰掰");				//輸出"謝謝,掰掰" 
+					return 0;							//結束程式 
+				}
 			}
 		}
+			
 		else{										//若輸入值不是a、b、c三個之一選項的話 
 			printf("請輸入a、b、c三個之一選項\n");	//輸出"請輸入a、b、c三個之一選項" 
 			getch();								//按任一鍵,不回傳回傳值 
