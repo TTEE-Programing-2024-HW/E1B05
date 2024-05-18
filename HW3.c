@@ -4,17 +4,48 @@
 #include <time.h> 
 
 void seat(char arr[10][10]){
-    int R,C;
-    for(R=0;R<10;R++){
-        for(C=0;C<10;C++){
-            printf("%c",arr[R][C]);
-        }
-        printf("\n");
+    int R,C,i;
+    arr[0][0]='\\';
+    for(i=1;i<=9;i++) {
+        arr[i][0]='0'+10-i;
+        arr[0][i]='0'+i;
     }
+	for(R=0;R<10;R++){
+		for(C=0;C<10;C++){
+			printf("%c",arr[R][C]);
+		}
+		printf("\n");
+	}
+}
+
+void rand_(char arr[10][10]){
+	int R,C,i;
+
+}
+
+void rand_seat(char arr[10][10]){
+	int count=0;
+	while(count<10){
+	int x=rand()%10+1;
+	int y=rand()%10+1;
+	if(arr[x][y]!='*'){
+		arr[x][y]='*';
+		count++;
+	}
+	int i,j;
+	for(i=1;i<10;i++){
+		for(j=1;j<10;j++){
+			if(arr[i][j]=='@'){
+				arr[i][j]='-';
+				count++;
+			}
+		}
+	}
+	}
 }
 
 int main(void){
-    int i,j,password,t=0,R,C,num;
+    int i,j,password,t=0,R,C,num,choice;
     char ch,yn;
     char arr[10][10];
     printf("Welcome to my homework\n");
@@ -36,7 +67,7 @@ int main(void){
             printf("歡迎光臨\n"); 								// 輸出"歡迎光臨"
             break; 												// 跳離此時while迴圈
         }
-		else{ 												// 若不是2024
+		else{ 													// 若不是2024
             printf("%c", '\a'); 								// 發出警示音
             printf("密碼錯誤\n"); 								// 輸出"密碼錯誤"
             t+=1; 												// 次數加一
@@ -49,21 +80,16 @@ int main(void){
     system("PAUSE"); 											// 螢幕畫面暫停，並等待使用者按任意鍵
     system("CLS"); 												// 清除畫面
 
-    arr[0][0]='\\';
-    for (i=1;i<=9;i++) {
-        arr[i][0]='0'+i;
-        arr[0][i]='0'+i;
-    }
-    for(R=1;R<=9;R++){
+	for(R=1;R<=9;R++){
         for(C=1;C<=9;C++){
             arr[R][C]='-';
         }
     }
     srand(time(NULL));
-    for(i = 0; i < 10; i++){
+    for(i=1;i<=10;i++){
         arr[rand()%9+1][rand()%9+1]='*';
     }
-
+    
     do{
     	printf(" ________________________\n");					 // 製作屬於自己的表單樣式
         printf("|a. Available seats       |\n");
@@ -77,48 +103,51 @@ int main(void){
 
         if(ch=='A'||ch=='a'){ 									// 若選選項A時
             system("CLS"); 										// 清除螢幕
+            rand_(arr);
             seat(arr);
             system("PAUSE");
             system("CLS");
         }
-		else if(ch=='B'||ch=='b'){						    // 若選選項B時
+		else if(ch=='B'||ch=='b'){							    // 若選選項B時
             system("CLS");
             printf("請問需要幾個座位(1~4)?\n");
-            while(1){
-                scanf("%d",&num);
-                fflush(stdin); 									// 清除緩衝區
-                if(num<=4&&num>=1) {
-                    break;
-                }
-				else{
-                    printf("請輸入1~4個座位\n");
-                }
-            }
+			scanf("%d",choice);
+			fflush(stdin);
+			if(choice>=1&&choice<=4){
+				rand_seat(arr);
+				seat(arr);
+			}
         }
 		else if(ch=='C'||ch=='c'){
-            system("CLS");
-            while (1) {
-            	system("CLS");
+           	system("CLS");
+           	seat(arr);
+           	while (1) {
             	printf("請輸入選擇的座位 (格式: 行-列)\n");
                 scanf("%d-%d",&R,&C);
                 fflush(stdin); 									// 清除緩衝區
                 if (R>=1&&R<=9&&C>=1&&C<=9){
-                	if(arr[R][C]=='-'){
-                		arr[R][C]='@'; 							// 標記選擇的座位
-	                    seat(arr);
+                	if(arr[10-R][C]=='-'){
+                		arr[10-R][C]='@'; 						// 標記選擇的座位
 	                    printf("還有要選擇嗎? (y/n)\n");
 	                    scanf("%c", &yn);
 	                    fflush(stdin); 							// 清除緩衝區
 	                    if(yn=='y'||yn=='Y'){
-	                    	system("pause");
 	                    	continue;
 						}
 	                    if(yn=='n'||yn=='N'){
+	                    	seat(arr);	
+	                    	for(R=0;R<10;R++){
+	                    		for(C=0;C<10;C++){
+	                    			if(arr[R][C]=='@'){
+									arr[R][C]='*';
+								}
+								}
+							}
+	                    	system("pause");							
 	                        break;
 	                    }
 	                    else{
 	                    	printf("請重新輸入\n");
-	                    	system("pause");
 	                    	continue;
 						}
 					}
@@ -133,7 +162,8 @@ int main(void){
                 }
             }
             system("CLS");
-        } else if(ch=='D'||ch=='d'){							// 若選選項D時
+        } 
+		else if(ch=='D'||ch=='d'){							// 若選選項D時
             printf("Continue? (y/n)\n"); 						// 輸出"continue?"(詢問是否繼續)
             while(1){
                 scanf("%c", &yn);
@@ -157,4 +187,3 @@ int main(void){
     system("PAUSE"); 											// 螢幕畫面暫停，並等待使用者按任意鍵
     return 0; 													// 結束程式
 }
-
