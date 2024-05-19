@@ -19,6 +19,7 @@ void seat(char arr[10][10]){
 
 int main(void){
     int i,j,password,t=0,R,C,choice,attempt;
+    int usable=1;
     char ch,yn;
     char arr[10][10];
     printf("Welcome to my homework\n");
@@ -89,76 +90,95 @@ int main(void){
         }
 		else if(ch=='B'||ch=='b'){
             system("CLS");
-            printf("請問需要幾個座位(1~4)?\n");
-            scanf("%d",&choice);
-            fflush(stdin);
-            if(choice>=1&&choice<=4){
-                if(choice<=3){
-                    while(1){
-                        int row=rand()%9+1;
-                        int col=rand()%(10-choice);
-                        int usable=1;
-                        for(i=col;i<col+choice;i++){
-                            if(arr[row][i]=='*'){
-                                usable=0;
-                                break;
-                            }
-                        }
-                        if(usable){
-                            for(i=col;i<col+choice;i++){
-                                arr[row][i]='@';
-                            }
-                            break;
-                        }
-                    }
+            while(1){
+            	printf("請問需要幾個座位(1~4)?\n");
+	            scanf("%d",&choice);
+	            fflush(stdin);
+	            if(choice>=1&&choice<=4){
+	                if(choice<=3){
+	                    while(1){
+	                        int row=rand()%9+1;
+	                        int col=rand()%(10-choice);
+	                        for(i=col;i<col+choice;i++){
+	                            if(arr[row][i]=='*'){
+	                                usable=0;
+	                                break;
+	                            }
+	                        }
+	                        if(usable){
+	                            for(i=col;i<col+choice;i++){
+	                                arr[row][i]='@';
+	                            }
+	                            break;
+	                        }
+	                    }
+	                }
+					else{
+	                    int found=0;
+	                    for(attempt=0;attempt<100;attempt++){
+	                        int row=rand()%9+1;
+	                        int col=rand()%(10-choice);
+	                        int usable=1;
+	                        for(i=col;i<col+choice;i++){
+	                            if(arr[row][i]=='*'){
+	                                usable=0;
+	                                break;
+	                            }
+	                        }
+	                        if(usable){
+	                            for(i=col;i<col+choice;i++){
+	                                arr[row][i]='@';
+	                            }
+	                            found=1;
+	                            break;
+	                        }
+	                    }
+	                    if(!found){
+	                        while(1){
+	                            int row=rand()%9+1;
+	                            int col=rand()%8+1;
+	                            int usable=1;
+	                            for(i=0;i<2;i++){
+	                                for(j=col;j<col+2;j++){
+	                                    if(arr[row+i][j]=='*'){
+	                                        usable=0;
+	                                        break;
+	                                    }
+	                                }
+	                                if(!usable)break;
+	                            }
+	                            if(usable){
+	                                for(i=0;i<2;i++){
+	                                    for(j=col;j<col+2;j++){
+	                                        arr[row+i][j]='@';
+	                                    }
+	                                }
+	                                break;
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	            seat(arr);
+	            printf("是否滿意這個座位?");
+	            scanf(" %c",&yn);
+                fflush(stdin);
+                if(yn=='y'||yn=='Y'){
+                    system("CLS");
+                    break;
+                }else if(yn=='n'||yn=='N'){
+                    system("CLS");
+                    printf("請重新選擇\n");
+                    for(R=0;R<10;R++){
+                    	for(C=0;C<10;C++){
+                    		if(arr[R][C]=='@'){
+		                    	arr[R][C]='-';
+							}
+						}
+					}
+                    continue;
                 }
-				else{
-                    int found=0;
-                    for(attempt=0;attempt<100;attempt++){
-                        int row=rand()%9+1;
-                        int col=rand()%(10-choice);
-                        int usable=1;
-                        for(i=col;i<col+choice;i++){
-                            if(arr[row][i]=='*'){
-                                usable=0;
-                                break;
-                            }
-                        }
-                        if(usable){
-                            for(i=col;i<col+choice;i++){
-                                arr[row][i]='@';
-                            }
-                            found=1;
-                            break;
-                        }
-                    }
-                    if(!found){
-                        while(1){
-                            int row=rand()%9+1;
-                            int col=rand()%8+1;
-                            int usable=1;
-                            for(i=0;i<2;i++){
-                                for(j=col;j<col+2;j++){
-                                    if(arr[row+i][j]=='*'){
-                                        usable=0;
-                                        break;
-                                    }
-                                }
-                                if(!usable)break;
-                            }
-                            if(usable){
-                                for(i=0;i<2;i++){
-                                    for(j=col;j<col+2;j++){
-                                        arr[row+i][j]='@';
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            seat(arr);
+			}
             for(R=0;R<10;R++){
 	            for(C=0;C<10;C++){
 	                if(arr[R][C]=='@'){
