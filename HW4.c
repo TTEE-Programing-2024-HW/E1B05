@@ -1,26 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int Ent(){
-	int a,n,i;
-	struct man{
+struct man{
 		char name[1000];
 		int number;
 		int math;
 		int physics;
 		int english;
 	};
-	struct man student[10];
+struct man student[10];
+
+int a=0;
+
+int Ent(){
+	int n,i;
 	printf("請輸入需要輸入幾位學生的成績:");
 	scanf("%d",&a);
+	fflush(stdin);
 	while(1){
 		if(a>=5&&a<=10){
 			for(i=0;i<a;i++){
 				printf("請輸入學生姓名(%d):",i+1);
 				scanf("%s",student[i].name);
+				fflush(stdin);
 				while(1){
 				printf("請輸入學生學號(%d):",i+1);
 				scanf("%d",&student[i].number);
+				fflush(stdin);
 					if(student[i].number>100000&&student[i].number<999999){
 						break;
 					}
@@ -32,6 +38,7 @@ int Ent(){
 				while(1){
 				printf("請輸入學生數學成績(%d):",i+1);
 				scanf("%d",&student[i].math);
+				fflush(stdin);
 					if(student[i].math>=0&&student[i].math<=100){
 						break;
 					}
@@ -43,6 +50,7 @@ int Ent(){
 				while(1){
 				printf("請輸入學生物理成績(%d):",i+1);
 				scanf("%d",&student[i].physics);
+				fflush(stdin);
 					if(student[i].physics>=0&&student[i].physics<=100){
 						break;
 					}
@@ -54,6 +62,7 @@ int Ent(){
 				while(1){
 				printf("請輸入學生英文成績(%d):",i+1);
 				scanf("%d",&student[i].english);
+				fflush(stdin);
 					if(student[i].english>=0&&student[i].english<=100){
 						break;
 					}
@@ -72,6 +81,18 @@ int Ent(){
 		}
 	}
 	
+}
+
+int B(){
+	int i;
+	float everage[10];
+	printf("學生成績如下:");
+	for(i=0;i<a;i++){
+		everage[i]=(student[i].math+student[i].physics+student[i].english)/3;
+	}
+	for(i=0;i<a;i++){
+		printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,everage[i]);	
+	}
 }
 
 int main(void){ 
@@ -133,7 +154,7 @@ int main(void){
         }
 		else if(ch=='B'||ch=='b'){
             system("CLS");
-            
+            B();
             system("PAUSE");
             system("CLS");
         }
