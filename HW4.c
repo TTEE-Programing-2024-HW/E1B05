@@ -7,6 +7,7 @@ struct man{
 		int math;
 		int physics;
 		int english;
+		float average;
 	};
 struct man student[10];
 
@@ -71,7 +72,7 @@ int Ent(){
 						continue;
 					}
 				}
-				
+				student[i].average=(student[i].math+student[i].physics+student[i].english)/3;
 			}
 			break;
 		} 
@@ -85,39 +86,54 @@ int Ent(){
 
 int B(){
 	int i;
-	float everage[10];
+	float average[10];
 	printf("學生成績如下:\n");
+	
 	for(i=0;i<a;i++){
-		everage[i]=(student[i].math+student[i].physics+student[i].english)/3;
-	}
-	for(i=0;i<a;i++){
-		printf("\t");
-		printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,everage[i]);	
+		printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,student[i].average);	
 	}
 }
 
 int C(){
 	char search[1000];
-	int i;
-	float everage[10];
-	for(i=0;i<a;i++){
-		everage[i]=(student[i].math+student[i].physics+student[i].english)/3;
-	}
+	int i,found=0;
 	printf("請輸入要搜尋的學生姓名:");
 	scanf("%s",search);
 	for(i=0;i<a;i++){
-		if(strcmp(student[i].name,search) == 0){
-			printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,everage[i]);
+		if(strcmp(student[i].name,search)==0){
+			printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,student[i].average);
+			found=1;
+		}
+		if(found=0){
+			printf("沒有這個人!");
 		}
 	}
+}
+
+int D(){
+	int i,j,n=0;
+	struct man temp;
+	for(i=0;i<a-1;i++){
+        for(j=0;j<a-i-1;j++){
+            if(student[j].average<student[j+1].average){
+                n++;
+				temp=student[j];
+                student[j]=student[j+1];
+                student[j+1]=temp;
+                
+            }
+        }
+    }
+    printf("學生成績排名如下:\n");
+    for(i=0;i<a;i++){
+        printf("姓名: %s, 學號: %d, 平均成績: %.1f\n",student[i].name,student[i].number,student[i].average);
+    }
 }
 
 int main(void){ 
     int i,j,password,t=0,num;
     char ch,yn;
     char arr[10][10];
-    
-
     
     printf("Welcome to my homework\n");
     for(i=20;i>=1;i--){
@@ -183,7 +199,7 @@ int main(void){
         }
         else if(ch=='D'||ch=='d'){
         	system("CLS");
-            
+            D();
             system("PAUSE");
             system("CLS");
 		}
