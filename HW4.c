@@ -14,6 +14,7 @@ struct man student[10];
 int a=0;
 
 int Ent(){
+	system("CLS");
 	int n,i;
 	printf("請輸入需要輸入幾位學生的成績:");
 	scanf("%d",&a);
@@ -28,7 +29,7 @@ int Ent(){
 				printf("請輸入學生學號(%d):",i+1);
 				scanf("%d",&student[i].number);
 				fflush(stdin);
-					if(student[i].number>100000&&student[i].number<999999){
+					if(student[i].number>=100000&&student[i].number<=999999){
 						break;
 					}
 					else{
@@ -81,10 +82,12 @@ int Ent(){
 			continue;
 		}
 	}
-	
+	system("PAUSE");
+    system("CLS");
 }
 
 int B(){
+	system("CLS");
 	int i;
 	float average[10];
 	printf("學生成績如下:\n");
@@ -92,9 +95,12 @@ int B(){
 	for(i=0;i<a;i++){
 		printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,student[i].average);	
 	}
+	system("PAUSE");
+    system("CLS");
 }
 
 int C(){
+	system("CLS");
 	char search[1000];
 	int i,found=0;
 	printf("請輸入要搜尋的學生姓名:");
@@ -108,9 +114,12 @@ int C(){
 			printf("沒有這個人!");
 		}
 	}
+	system("PAUSE");
+    system("CLS");
 }
 
 int D(){
+	system("CLS");
 	int i,j,n=0;
 	struct man temp;
 	for(i=0;i<a-1;i++){
@@ -128,6 +137,8 @@ int D(){
     for(i=0;i<a;i++){
         printf("姓名: %s, 學號: %d, 平均成績: %.1f\n",student[i].name,student[i].number,student[i].average);
     }
+    system("PAUSE");
+    system("CLS");
 }
 
 int main(void){ 
@@ -180,28 +191,16 @@ int main(void){
         fflush(stdin);
 
         if(ch=='A'||ch=='a'){
-            system("CLS");
             Ent();
-            system("PAUSE");
-            system("CLS");
         }
 		else if(ch=='B'||ch=='b'){
-            system("CLS");
             B();
-            system("PAUSE");
-            system("CLS");
         }
 		else if(ch=='C'||ch=='c'){
-            system("CLS");
             C();
-            system("PAUSE");
-            system("CLS");
         }
         else if(ch=='D'||ch=='d'){
-        	system("CLS");
             D();
-            system("PAUSE");
-            system("CLS");
 		}
 		else if(ch=='E'||ch=='e'){
         	system("CLS");
