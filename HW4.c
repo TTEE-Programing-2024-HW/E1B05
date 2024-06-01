@@ -86,17 +86,34 @@ int Ent(){
 int B(){
 	int i;
 	float everage[10];
-	printf("學生成績如下:");
+	printf("學生成績如下:\n");
 	for(i=0;i<a;i++){
 		everage[i]=(student[i].math+student[i].physics+student[i].english)/3;
 	}
 	for(i=0;i<a;i++){
+		printf("\t");
 		printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,everage[i]);	
 	}
 }
 
+int C(){
+	char search[1000];
+	int i;
+	float everage[10];
+	for(i=0;i<a;i++){
+		everage[i]=(student[i].math+student[i].physics+student[i].english)/3;
+	}
+	printf("請輸入要搜尋的學生姓名:");
+	scanf("%s",search);
+	for(i=0;i<a;i++){
+		if(strcmp(student[i].name,search) == 0){
+			printf("姓名: %s, 學號: %d, 數學: %d, 物理: %d, 英文: %d, 平均: %.1f\n",student[i].name,student[i].number,student[i].math,student[i].physics,student[i].english,everage[i]);
+		}
+	}
+}
+
 int main(void){ 
-    int i,j,password,t=0,R,C,choice,num;
+    int i,j,password,t=0,num;
     char ch,yn;
     char arr[10][10];
     
@@ -160,7 +177,7 @@ int main(void){
         }
 		else if(ch=='C'||ch=='c'){
             system("CLS");
-            
+            C();
             system("PAUSE");
             system("CLS");
         }
