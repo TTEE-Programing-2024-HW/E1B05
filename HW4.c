@@ -1,7 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+int Ent(){
+	int a,n,i;
+	struct man{
+		char name[1000];
+		int number;
+		int math;
+		int physics;
+		int english;
+	};
+	struct man student[10];
+	printf("請輸入需要輸入幾位學生的成績:");
+	scanf("%d",&a);
+	while(1){
+		if(a>=5&&a<=10){
+			for(i=0;i<a;i++){
+				printf("請輸入學生姓名(%d):",i+1);
+				scanf("%s",student[i].name);
+				while(1){
+				printf("請輸入學生學號(%d):",i+1);
+				scanf("%d",&student[i].number);
+					if(student[i].number>100000&&student[i].number<999999){
+						break;
+					}
+					else{
+						printf("請重新輸入!");
+						continue;
+					}
+				}
+				while(1){
+				printf("請輸入學生數學成績(%d):",i+1);
+				scanf("%d",&student[i].math);
+					if(student[i].math>=0&&student[i].math<=100){
+						break;
+					}
+					else{
+						printf("請重新輸入!");
+						continue;
+					}
+				}
+				while(1){
+				printf("請輸入學生物理成績(%d):",i+1);
+				scanf("%d",&student[i].physics);
+					if(student[i].physics>=0&&student[i].physics<=100){
+						break;
+					}
+					else{
+						printf("請重新輸入!");
+						continue;
+					}
+				}
+				while(1){
+				printf("請輸入學生英文成績(%d):",i+1);
+				scanf("%d",&student[i].english);
+					if(student[i].english>=0&&student[i].english<=100){
+						break;
+					}
+					else{
+						printf("請重新輸入!");
+						continue;
+					}
+				}
+				
+			}
+			break;
+		} 
+		else {
+			printf("請輸入5~10位學生!!!");
+			continue;
+		}
+	}
+	
+}
 
 int main(void){ 
     int i,j,password,t=0,R,C,choice,num;
@@ -35,7 +106,7 @@ int main(void){
             t+=1;
             if(t>=3){
                 printf("錯誤三次,掰掰\n");
-                continue;
+                return 0;
             }
         }
     }
@@ -56,7 +127,7 @@ int main(void){
 
         if(ch=='A'||ch=='a'){
             system("CLS");
-            
+            Ent();
             system("PAUSE");
             system("CLS");
         }
@@ -80,7 +151,7 @@ int main(void){
 		}
 		else if(ch=='E'||ch=='e'){
         	system("CLS");
-			printf("Continue? (y/n)\n");
+            printf("Continue? (y/n)\n");
 			while(1){
 		       scanf(" %c",&yn);
 		            fflush(stdin);
@@ -93,7 +164,7 @@ int main(void){
 		                return 0;
 		            }
 		        }
-			system("PAUSE");
+            system("PAUSE");
             system("CLS");
         }
 		else{
@@ -104,3 +175,4 @@ int main(void){
     }while(1);
     return 0;
 }
+
